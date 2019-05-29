@@ -2,26 +2,7 @@ import React from "react";
 import { Component } from "react";
 // import './App.css';
 
-class TimerLengthControl extends React.Component {
-  render() {
-    return (
-      React.createElement("div", { className: "length-control" },
-      React.createElement("div", { id: this.props.titleID },
-      this.props.title),
 
-      React.createElement("button", { id: this.props.minID,
-        className: "btn-level", value: "-",
-        onClick: this.props.onClick },"-"),
-
-      React.createElement("div", { id: this.props.lengthID, className: "btn-level" },
-      this.props.length),
-
-      React.createElement("button", { id: this.props.addID,
-        className: "btn-level", value: "+",
-        onClick: this.props.onClick },"+"))
-      );
-  }};
-;
 
 
 
@@ -32,6 +13,16 @@ class Timer_ extends React.Component {
           this.state = {
             secondsElapsed: 1500 //1500 seconds = 25 min
           };
+        }
+        increaseTimer(){
+          this.setState({secondsElapsed: this.state.secondsElapsed + 60})
+        }
+
+        decreaseTimer(){
+          if (this.state.secondsElapsed > 0)  {
+            this.setState({secondsElapsed: this.state.secondsElapsed - 60})
+          }
+
         }
 
         getHours() {
@@ -56,8 +47,9 @@ class Timer_ extends React.Component {
 
         resetTime() {
           this.reset = this.setState({
-            secondsElapsed: (this.state.secondsElapsed = 0)
+            secondsElapsed: (this.state.secondsElapsed = 1500)
           });
+          clearInterval(this.countdown);
         }
 
         pauseTime() {
@@ -66,6 +58,7 @@ class Timer_ extends React.Component {
 
         render() {
           return (
+
             <div className="App">
               <h1>
                 {this.getHours()}:{this.getMinutes()}:{this.getSeconds()}
@@ -73,6 +66,9 @@ class Timer_ extends React.Component {
               <button onClick={() => this.startTime()}>Start</button>
               <button onClick={() => this.pauseTime()}>Pause</button>
               <button onClick={() => this.resetTime()}>Reset</button>
+
+              <button onClick={() => this.increaseTimer()}>+</button>
+              <button onClick={() => this.decreaseTimer()}>-</button>
             </div>
           );
         }
@@ -86,7 +82,6 @@ class App extends Component {
       <div className="App">
         <div className="App-title">Timers Demo</div>
         <div className="Timers">
-        <TimerLengthControl/>
         <Timer_ />
         </div>
       </div>
