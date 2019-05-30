@@ -1,17 +1,20 @@
 import React from "react";
 import { Component } from "react";
-// import './App.css';
-
-
-
-
+import './App.css';
 
 
 class Timer_ extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            secondsElapsed: 1500 //1500 seconds = 25 min
+            secondsElapsed: 1, //1500 seconds = 25 min
+            timerDone: false,
+
+            breakFlag: false,
+            breakTime:  5,
+
+            timerTitle: "fill"
+
           };
         }
         increaseTimer(){
@@ -39,11 +42,19 @@ class Timer_ extends React.Component {
 
         startTime() {
           var _this = this;
-          this.countdown = setInterval(function() {
+          var count = this.state.secondsElapsed;
+          this.countdown = setInterval(dec, 1000); //decrements secondsElapsed by one every 1000ms.
+          function dec(){
+            if (count > 0){
             _this.setState({ secondsElapsed: _this.state.secondsElapsed - 1 });
-
-          }, 1000);
+            count -= 1;
+          }
+          //once timer is done, clear timer
+          if (count == 0){
+          clearInterval(this.countdown);
+        }}
         }
+
 
         resetTime() {
           this.reset = this.setState({
@@ -60,6 +71,7 @@ class Timer_ extends React.Component {
           return (
 
             <div className="App">
+            <h1> {this.state.timerTitle} </h1>
               <h1>
                 {this.getHours()}:{this.getMinutes()}:{this.getSeconds()}
               </h1>
@@ -80,10 +92,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-title">Timers Demo</div>
-        <div className="Timers">
         <Timer_ />
-        </div>
       </div>
     );
   }
