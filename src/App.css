@@ -22,17 +22,21 @@
   color: white;
 
 }
+
+.Inputs{
+    display: flex;
+    /* justify-content: center; */
+}
+
 .TimerTitle{
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: calc(10px + 2vmin);
 
 
 }
-.conditional{
+.TimeDisplay{
   font-family: digital;
   font-size: 80px;
-
-
 }
 
 input[type="text"]{
