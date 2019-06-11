@@ -17,19 +17,19 @@ class Pomodoro extends React.Component {
         }
 
         increaseTimer(clockType){
-          if (clockType == "pom"){
+          if (clockType === "pom"){
             this.setState({
               pomInput: this.state.pomTime + 60,
               pomTime: this.state.pomTime + 60});
           }
-          else if (clockType == "break"){
+          else if (clockType === "break"){
             this.setState({
               breakInput: this.state.breakTime + 60,
               breakTime: this.state.breakTime + 60})}
         }
 
         decreaseTimer(clockType){
-          if (clockType == "pom"){
+          if (clockType === "pom"){
             if (this.state.pomTime > 60)  {
               this.setState({
                 pomInput:this.state.pomTime - 60,
@@ -38,7 +38,7 @@ class Pomodoro extends React.Component {
               pomInput: 0,
               pomTime: 0})}
         }
-          else if (clockType == "break"){
+          else if (clockType === "break"){
             if (this.state.breakTime > 60)  {
               this.setState({
                 breakInput: this.state.breakTime - 60,
@@ -50,32 +50,32 @@ class Pomodoro extends React.Component {
       }
 
         getHours(clockType) {
-          if (clockType == "pom" || clockType == "pomInput"){return ("0" + Math.floor(this.state.pomTime / 3600)).slice(-2);}
-          else if (clockType == "break"){return ("0" + Math.floor(this.state.pomTime / 3600)).slice(-2);}
-          else if (clockType == "pomInput"){return ("0" + Math.floor(this.state.pomInput / 3600)).slice(-2);}
-          else if (clockType == "breakInput"){return ("0" + Math.floor(this.state.breakInput / 3600)).slice(-2);}
+          if (clockType === "pom"){return ("0" + Math.floor(this.state.pomTime / 3600)).slice(-2);}
+          else if (clockType === "break"){return ("0" + Math.floor(this.state.pomTime / 3600)).slice(-2);}
+          else if (clockType === "pomInput"){return ("0" + Math.floor(this.state.pomInput / 3600)).slice(-2);}
+          else if (clockType === "breakInput"){return ("0" + Math.floor(this.state.breakInput / 3600)).slice(-2);}
         }
 
         getMinutes(clockType) {
-          if (clockType == "pom"){return ("0" + Math.floor((this.state.pomTime % 3600) / 60)).slice(-2);}
-          else if (clockType == "break"){return ("0" + Math.floor((this.state.breakTime % 3600) / 60)).slice(-2);}
-          else if (clockType == "pomInput"){return ("0" + Math.floor((this.state.pomInput % 3600) / 60)).slice(-2);}
-          else if (clockType == "breakInput"){return ("0" + Math.floor((this.state.breakInput % 3600) / 60)).slice(-2);}
+          if (clockType === "pom"){return ("0" + Math.floor((this.state.pomTime % 3600) / 60)).slice(-2);}
+          else if (clockType === "break"){return ("0" + Math.floor((this.state.breakTime % 3600) / 60)).slice(-2);}
+          else if (clockType === "pomInput"){return ("0" + Math.floor((this.state.pomInput % 3600) / 60)).slice(-2);}
+          else if (clockType === "breakInput"){return ("0" + Math.floor((this.state.breakInput % 3600) / 60)).slice(-2);}
         }
 
         getSeconds(clockType) {
-          if (clockType == "pom"){return ("0" + (this.state.pomTime % 60)).slice(-2);}
-          else if (clockType == "break"){return ("0" + (this.state.breakTime % 60)).slice(-2);}
+          if (clockType === "pom"){return ("0" + (this.state.pomTime % 60)).slice(-2);}
+          else if (clockType === "break"){return ("0" + (this.state.breakTime % 60)).slice(-2);}
         }
 
         clearCountdown(clockType){
-          if (clockType == "pom"){clearInterval(this.countdown);}
-          else if (clockType == "break"){clearInterval(this.countdownB);};
+          if (clockType === "pom"){clearInterval(this.countdown);}
+          else if (clockType === "break"){clearInterval(this.countdownB);};
         }
 
         helper(clockType){
-          if (clockType == "pom"){this.startBreakTime();}
-          else if (clockType == "break"){this.startTime()};
+          if (clockType === "pom"){this.startBreakTime();}
+          else if (clockType === "break"){this.startTime()};
        }
 
         startTime() {
@@ -88,8 +88,7 @@ class Pomodoro extends React.Component {
 
               pomTime: _this.state.pomTime - 1 });
           }
-          //clear timer when count is zero
-          if (_this.state.pomTime == 0){
+          if (_this.state.pomTime === 0){
             _this.setState({
               pomTime: _this.state.pomInput,
               breakFlag: true})
@@ -107,7 +106,7 @@ class Pomodoro extends React.Component {
             _this.setState({ breakTime: _this.state.breakTime - 1 });
           }
           //clear timer when count is zero
-          if (_this.state.breakTime == 0){
+          if (_this.state.breakTime === 0){
             _this.setState({
               breakTime: _this.state.breakInput,
               breakFlag: false})
@@ -130,16 +129,16 @@ class Pomodoro extends React.Component {
         }
 
         pauseButton(clockType) {
-          if (clockType == "pom"){clearInterval(this.countdown);}
-          else if (clockType == "break"){clearInterval(this.countdownB);};
+          if (clockType === "pom"){clearInterval(this.countdown);}
+          else if (clockType === "break"){clearInterval(this.countdownB);};
           this.setState({
             buttonPress: true
           });
         }
 
         startButton(clockType){
-          if (clockType == "pom"){this.startTime();}
-          else if (clockType == "break"){this.startBreakTime();};
+          if (clockType === "pom"){this.startTime();}
+          else if (clockType === "break"){this.startBreakTime();};
           this.setState({
             buttonPress: false
           });
@@ -152,18 +151,18 @@ class Pomodoro extends React.Component {
             <div className="App">
 
             <div className = "InputButtons">
-
+            <h1 className="AppTitle">Pomodoro Timer</h1>
             <div className= "btns">
             <h2 className="ButtonTitle">session length</h2>
             <button className= "plusminus" onClick={() => this.increaseTimer("pom")}>+</button>
-            <div className= "plusminus">{this.getHours("pomInput")}:{this.getMinutes("pomInput")}</div>
+            <div className= "plusminus" id= "pomInputTimer">{this.getHours("pomInput")}:{this.getMinutes("pomInput")}</div>
             <button className= "plusminus" onClick={() => this.decreaseTimer("pom")}>-</button>
             </div>
 
             <div className = "btns">
             <h2 className="ButtonTitle">break length</h2>
             <button className = "plusminus" onClick={() => this.increaseTimer("break")}>+</button>
-            <div className= "plusminus">{this.getHours("breakInput")}:{this.getMinutes("breakInput")}</div>
+            <div className= "plusminus" id= "breakInputTimer">{this.getHours("breakInput")}:{this.getMinutes("breakInput")}</div>
             <button className = "plusminus" onClick={() => this.decreaseTimer("break")}>-</button>
             </div>
 
@@ -173,7 +172,7 @@ class Pomodoro extends React.Component {
             {(this.state.breakFlag) ?
               <div className="TimeDisplay">
               <h2 className="TimerTitle">Break</h2>
-              <div >{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
+              <div id= "breakInputTimer">{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
               {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("break")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("break")}>Pause</button>}
               <button className="startpause" onClick={() => this.resetTime("break")}>Reset</button>
               </div>
@@ -182,7 +181,7 @@ class Pomodoro extends React.Component {
 
             <div className="TimeDisplay">
             <h2 className="TimerTitle">Session</h2>
-            <div >{this.getHours("pom")}:{this.getMinutes("pom")}:{this.getSeconds("pom")}</div>
+            <div id= "pomInputTimer">{this.getHours("pom")}:{this.getMinutes("pom")}:{this.getSeconds("pom")}</div>
             <div>
             {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("pom")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("pom")}>Pause</button>}
             <button className="startpause" onClick={() => this.resetTime("pom")}>Reset</button>
