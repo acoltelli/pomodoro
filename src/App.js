@@ -7,8 +7,8 @@ class Pomodoro extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            pomTime: 3, //1500 seconds = 25 min
-            breakTime: 5,
+            pomTime: 1500, //1500 seconds = 25 min
+            breakTime: 300,
             pomInput: 1500,
             breakInput: 300,
             breakFlag: false,
@@ -17,20 +17,35 @@ class Pomodoro extends React.Component {
         }
 
         increaseTimer(clockType){
-          if (clockType == "pom"){this.setState({pomTime: this.state.pomTime + 60})}
-          else if (clockType == "break"){this.setState({breakTime: this.state.breakTime + 60})}
+          if (clockType == "pom"){
+            this.setState({
+              pomInput: this.state.pomTime + 60,
+              pomTime: this.state.pomTime + 60});
+          }
+          else if (clockType == "break"){
+            this.setState({
+              breakInput: this.state.breakTime + 60,
+              breakTime: this.state.breakTime + 60})}
         }
 
         decreaseTimer(clockType){
           if (clockType == "pom"){
             if (this.state.pomTime > 60)  {
-              this.setState({pomTime: this.state.pomTime - 60})}
-            else {this.setState({pomTime: 0})}
+              this.setState({
+                pomInput:this.state.pomTime - 60,
+                pomTime: this.state.pomTime - 60})}
+            else {this.setState({
+              pomInput: 0,
+              pomTime: 0})}
         }
           else if (clockType == "break"){
             if (this.state.breakTime > 60)  {
-              this.setState({breakTime: this.state.breakTime - 60})  }
-            else {this.setState({breakTime: 0})}
+              this.setState({
+                breakInput: this.state.breakTime - 60,
+                breakTime: this.state.breakTime - 60})  }
+            else {this.setState({
+              breakInput: 0,
+              breakTime: 0})}
         }
       }
 
@@ -51,8 +66,6 @@ class Pomodoro extends React.Component {
         getSeconds(clockType) {
           if (clockType == "pom"){return ("0" + (this.state.pomTime % 60)).slice(-2);}
           else if (clockType == "break"){return ("0" + (this.state.breakTime % 60)).slice(-2);}
-          else if (clockType == "pomInput"){return ("0" + (this.state.pomInput % 60)).slice(-2);}
-          else if (clockType == "breakInput"){return ("0" + (this.state.breakInput % 60)).slice(-2);}
         }
 
         clearCountdown(clockType){
@@ -105,11 +118,12 @@ class Pomodoro extends React.Component {
 
         resetTime(clockType) {
           this.reset = this.setState({
-            pomTime: (this.state.pomTime = 1500),
+            pomTime: 1500,
             breakTime: 300,
             pomInput: 1500,
             breakInput: 300,
             breakFlag: false,
+            buttonPress: true
           });
           this.clearCountdown(clockType);
 
@@ -127,7 +141,6 @@ class Pomodoro extends React.Component {
           if (clockType == "pom"){this.startTime();}
           else if (clockType == "break"){this.startBreakTime();};
           this.setState({
-            pomInput: this.state.pomTime,
             buttonPress: false
           });
 
@@ -138,53 +151,51 @@ class Pomodoro extends React.Component {
           return (
             <div className="App">
 
-            <div className = "Inputs">
+            <div className = "InputButtons">
 
-            <div id = "SessionInput">
-            <h2 className="TimerTitle">session length</h2>
-            <button onClick={() => this.increaseTimer("pom")}>+</button>
-
-            {this.state.buttonPress ? <div className="">{this.getHours("pom")}:{this.getMinutes("pom")}:{this.getSeconds("pom")}</div>
-            :
-            <div className="">{this.getHours("pomInput")}:{this.getMinutes("pomInput")}:{this.getSeconds("pomInput")}</div>
-            }
-
-
-            <button onClick={() => this.decreaseTimer("pom")}>-</button>
+            <div className= "btns">
+            <h2 className="ButtonTitle">session length</h2>
+            <button className= "plusminus" onClick={() => this.increaseTimer("pom")}>+</button>
+            <div className= "plusminus">{this.getHours("pomInput")}:{this.getMinutes("pomInput")}</div>
+            <button className= "plusminus" onClick={() => this.decreaseTimer("pom")}>-</button>
             </div>
 
-            <div id = "BreakInput">
-            <h2 className="TimerTitle">break length</h2>
-            <button onClick={() => this.increaseTimer("break")}>+</button>
-            <div className="">{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
-            <button onClick={() => this.decreaseTimer("break")}>-</button>
+            <div className = "btns">
+            <h2 className="ButtonTitle">break length</h2>
+            <button className = "plusminus" onClick={() => this.increaseTimer("break")}>+</button>
+            <div className= "plusminus">{this.getHours("breakInput")}:{this.getMinutes("breakInput")}</div>
+            <button className = "plusminus" onClick={() => this.decreaseTimer("break")}>-</button>
             </div>
 
             </div>
 
+            <div className="TimerElement">
             {(this.state.breakFlag) ?
-              <div>
-              <h2 className="TimerTitle"> Break </h2>
-              <div className="TimeDisplay">{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
-              {this.state.buttonPress ? <button onClick={() => this.startButton("break")}>Start</button> : <button onClick={() => this.pauseButton("break")}>Pause</button>}
-              <button onClick={() => this.resetTime("break")}>Reset</button>
+              <div className="TimeDisplay">
+              <h2 className="TimerTitle">Break</h2>
+              <div >{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
+              {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("break")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("break")}>Pause</button>}
+              <button className="startpause" onClick={() => this.resetTime("break")}>Reset</button>
               </div>
 
             :
 
+            <div className="TimeDisplay">
+            <h2 className="TimerTitle">Session</h2>
+            <div >{this.getHours("pom")}:{this.getMinutes("pom")}:{this.getSeconds("pom")}</div>
             <div>
-            <h2 className="TimerTitle"> Session </h2>
-            <div className="TimeDisplay">{this.getHours("pom")}:{this.getMinutes("pom")}:{this.getSeconds("pom")}</div>
-            {this.state.buttonPress ? <button onClick={() => this.startButton("pom")}>Start</button> : <button onClick={() => this.pauseButton("pom")}>Pause</button>}
-            <button onClick={() => this.resetTime("pom")}>Reset</button>
+            {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("pom")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("pom")}>Pause</button>}
+            <button className="startpause" onClick={() => this.resetTime("pom")}>Reset</button>
+            </div>
+
             </div>
             }
+            </div>
 
             </div>
           );
         }
       }
-
 
 
 class App extends Component {
