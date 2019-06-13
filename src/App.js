@@ -80,18 +80,18 @@ class Pomodoro extends React.Component {
 
         startTime() {
           var _this = this;
-          this.countdown = setInterval(dec, 1000); //decrements pomTime by one every 1000ms.
-
+          this.countdown = setInterval(dec, 1000);
           function dec(){
             if (_this.state.pomTime > 0){
             _this.setState({
-
               pomTime: _this.state.pomTime - 1 });
           }
           if (_this.state.pomTime === 0){
             _this.setState({
               pomTime: _this.state.pomInput,
               breakFlag: true})
+          // _this.alert();
+          _this.refs.audioBeep.play();
           _this.clearCountdown("pom");
           _this.helper("pom");  }
 
@@ -100,18 +100,18 @@ class Pomodoro extends React.Component {
        //TODO:refactor
         startBreakTime() {
           var _this = this;
-          this.countdownB = setInterval(dec, 1000); //decrements breakTime by one every 1000ms.
+          this.countdownB = setInterval(dec, 1000);
           function dec(){
             if (_this.state.breakTime > 0){
-            _this.setState({ breakTime: _this.state.breakTime - 1 });
-          }
-          //clear timer when count is zero
-          if (_this.state.breakTime === 0){
-            _this.setState({
-              breakTime: _this.state.breakInput,
-              breakFlag: false})
-            _this.clearCountdown("break");
-            _this.helper("break");
+              _this.setState({ breakTime: _this.state.breakTime - 1 });
+            }
+            if (_this.state.breakTime === 0){
+              _this.setState({
+                breakTime: _this.state.breakInput,
+                breakFlag: false})
+              _this.refs.audioBeep.play();
+              _this.clearCountdown("break");
+              _this.helper("break");
         }}
         }
 
@@ -150,6 +150,8 @@ class Pomodoro extends React.Component {
           return (
             <div className="App">
 
+            <audio ref= "audioBeep" preload = "auto" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"/>
+
             <div className = "InputButtons">
             <h1 className="AppTitle">Pomodoro Timer</h1>
             <div className= "btns">
@@ -172,6 +174,7 @@ class Pomodoro extends React.Component {
             {(this.state.breakFlag) ?
               <div className="TimeDisplay">
               <h2 className="TimerTitle">Break</h2>
+
               <div id= "breakInputTimer">{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
               {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("break")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("break")}>Pause</button>}
               <button className="startpause" onClick={() => this.resetTime("break")}>Reset</button>

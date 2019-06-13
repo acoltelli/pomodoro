@@ -17,6 +17,7 @@
   align-items: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  /* vertical-align: top; */
 }
 
  button {
@@ -33,7 +34,8 @@
 }
 
 #pomInputTimer{
-  color: #D19966;
+  /* color: #D19966; */
+  color:#E06C75;
 }
 
 .InputButtons{
@@ -45,27 +47,24 @@
   padding-right: 15px;
   padding-left: 15px;
   padding-bottom: 15px;
-
 }
 
 .plusminus{
   display: inline-block;
   font-family: 'Montserrat', sans-serif;
-  color: #828892;
+  color: #828892
 }
 
 .AppTitle{
   font-family: 'Montserrat', sans-serif;
   font-size: 28px;
   line-height: 10px;
-  opacity: .9;
 }
 
 .ButtonTitle {
   font-family: 'Montserrat', sans-serif;
   font-size: 24px;
   line-height: 0px;
-  opacity: .9;
 }
 
 .TimerTitle{
