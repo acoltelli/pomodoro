@@ -9,23 +9,26 @@
   font-size: 30px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  background: #282c34;
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
+  margin-bottom: -45px;
+  margin-top: 40px;
 }
 
 .Footer {
   position: fixed;
+  left: 0;
   bottom: 0;
+  width: 100%;
+  background-color: #282c34;
   color: white;
-  text-align: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 5px;
   font-size: 16px;
+  height: 40px;
 }
 
 a:link {
@@ -107,6 +110,7 @@ a:hover {
   padding-left: 32px;
   line-height: 40px;
   position: relative;
+
 }
 
 .startpause{
@@ -114,8 +118,10 @@ a:hover {
    padding-bottom: 32px;
 }
 
-body {
+body, html {
+  background: #282c34;
   margin: 0;
+  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

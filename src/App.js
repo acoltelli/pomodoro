@@ -148,8 +148,8 @@ class Pomodoro extends React.Component {
         // TODO:let hold down of button keep increading count
         render() {
           return (
+            <div>
             <div className="App">
-            <body>
             <audio ref= "audioBeep" preload = "auto" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"/>
 
             <div className = "InputButtons">
@@ -192,14 +192,13 @@ class Pomodoro extends React.Component {
 
             </div>
             }
-            </div>
-            </body>
 
-            <div className = "Footer">
-            <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">about</a>
+            </div>
+            </div>
+            <footer className = "Footer">
             <a href="https://github.com/acoltelli">author</a>
-            </div>
-
+            <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">about</a>
+            </footer>
             </div>
           );
         }
