@@ -12,7 +12,8 @@ class Pomodoro extends React.Component {
             pomInput: 1500,
             breakInput: 300,
             breakFlag: false,
-            buttonPress: true
+            buttonPress: true,
+            completedSessions: 0
           };
         }
 
@@ -89,8 +90,8 @@ class Pomodoro extends React.Component {
           if (_this.state.pomTime === 0){
             _this.setState({
               pomTime: _this.state.pomInput,
-              breakFlag: true})
-          // _this.alert();
+              breakFlag: true
+            })
           _this.refs.audioBeep.play();
           _this.clearCountdown("pom");
           _this.helper("pom");  }
@@ -108,7 +109,9 @@ class Pomodoro extends React.Component {
             if (_this.state.breakTime === 0){
               _this.setState({
                 breakTime: _this.state.breakInput,
-                breakFlag: false})
+                breakFlag: false,
+                completedSessions: _this.state.completedSessions + 1,
+              })
               _this.refs.audioBeep.play();
               _this.clearCountdown("break");
               _this.helper("break");
@@ -122,7 +125,8 @@ class Pomodoro extends React.Component {
             pomInput: 1500,
             breakInput: 300,
             breakFlag: false,
-            buttonPress: true
+            buttonPress: true,
+            completedSessions: 0
           });
           this.clearCountdown(clockType);
 
@@ -176,8 +180,8 @@ class Pomodoro extends React.Component {
               <h2 className="TimerTitle">Break</h2>
 
               <div id= "breakInputTimer">{this.getHours("break")}:{this.getMinutes("break")}:{this.getSeconds("break")}</div>
-              {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("break")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("break")}>Pause</button>}
-              <button className="startpause" onClick={() => this.resetTime("break")}>Reset</button>
+              {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("break")}>start</button> : <button className="startpause" onClick={() => this.pauseButton("break")}>pause</button>}
+              <button className="startpause" onClick={() => this.resetTime("break")}>reset</button>
               </div>
 
             :
@@ -186,13 +190,13 @@ class Pomodoro extends React.Component {
             <h2 className="TimerTitle">Session</h2>
             <div id= "pomInputTimer">{this.getHours("pom")}:{this.getMinutes("pom")}:{this.getSeconds("pom")}</div>
             <div>
-            {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("pom")}>Start</button> : <button className="startpause" onClick={() => this.pauseButton("pom")}>Pause</button>}
-            <button className="startpause" onClick={() => this.resetTime("pom")}>Reset</button>
+            {this.state.buttonPress ? <button className="startpause" onClick={() => this.startButton("pom")}>start</button> : <button className="startpause" onClick={() => this.pauseButton("pom")}>pause</button>}
+            <button className="startpause" onClick={() => this.resetTime("pom")}>reset</button>
             </div>
 
             </div>
             }
-
+            {(this.state.completedSessions > 0) ? <p className="ButtonTitle">sessions completed: {this.state.completedSessions}</p> : ""}
             </div>
             </div>
             <footer className = "Footer">
