@@ -18,7 +18,7 @@
   margin-bottom: -45px;
   margin-top: 40px;
 }
-
+/* TODO: fix scroll of footer  */
 .Footer {
   position: fixed;
   left: 0;
@@ -99,6 +99,8 @@ a:hover {
 .TimerTitle{
   font-family: 'Montserrat', sans-serif;
   font-size: 32px;
+  padding-bottom: 15px;
+  line-height: 20px;
 }
 
 .TimeDisplay{
@@ -115,7 +117,7 @@ a:hover {
 
 .startpause{
   font-family: 'Montserrat', sans-serif;
-   padding-bottom: 32px;
+   padding-bottom: 24px;
 }
 
 body, html {
