@@ -8,16 +8,45 @@
 .App{
   font-size: 30px;
   text-align: center;
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-  /* vertical-align: top; */
+}
+
+.Footer {
+  position: fixed;
+  bottom: 0;
+  color: white;
+  text-align: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 16px;
+}
+
+a:link {
+  padding: 10px;
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+  padding: 10px;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #599AD2;
+  padding: 10px;
+  background-color: transparent;
+  text-decoration: underline;
 }
 
  button {
@@ -51,18 +80,15 @@
 
 .plusminus{
   display: inline-block;
-  font-family: 'Montserrat', sans-serif;
   color: #828892
 }
 
 .AppTitle{
-  font-family: 'Montserrat', sans-serif;
   font-size: 28px;
   line-height: 10px;
 }
 
 .ButtonTitle {
-  font-family: 'Montserrat', sans-serif;
   font-size: 24px;
   line-height: 0px;
 }
