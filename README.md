@@ -1,5 +1,7 @@
 # pomodoro
-Pomodoro style timer built using React. 
+Pomodoro style timer built using React.   
+<img src="https://github.com/acoltelli/pomodoro/blob/master/pomodoro.gif" width="500">
+
 
 ## Build Instructions
  
